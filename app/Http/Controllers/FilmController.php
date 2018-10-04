@@ -22,6 +22,10 @@ class FilmController extends Controller
 
     public function store(Request $request)
     {
+    	//return $request->genre;
+    
+    	  
+              $genre='';
     	 $validator=Validator::make($request->all(),[
                       'name'=>'required',
                       'description'=>'required',
@@ -29,7 +33,8 @@ class FilmController extends Controller
                       'release_date'=>'required',
                       'rating'=>'required|min:1|max:5',
                       'country'=>'required',
-                      'ticket_price'=>'required'
+                      'ticket_price'=>'required',
+                      'photo'=>'required'
                      
                       // 'photo' => 'required|mimes:jpeg,bmp,png,jpg',
 
@@ -49,13 +54,24 @@ class FilmController extends Controller
 
                $film=new Films;
                $film->photo='images/'.$name;
-               $film->film_slug=str_replace("","_",$request->name);
-               $film->name=$request->name;
+               // foreach ($request->ge as $key => $value) {
+               // 	# code...
+               // }
+               if($request->genre!=''){
+               
+               foreach ($request->genre as $key => $value) {
+               	# code...
+    	  	$genre.=$value.',';
+               }
+           }
+
+               $film->film_slug=str_replace(" ","_",$request->name);
+                $film->name=$request->name;
                $film->description=$request->description;
                $film->country=$request->country;
                $film->release_date=$request->release_date;
                $film->ratings=$request->rating;
-               $film->genrs='Action,thrilling';
+               $film->genrs=$genre;
                $film->name=$request->name;
                $film->ticket_price=$request->ticket_price;
                $film->created_by=Auth::user()->id;

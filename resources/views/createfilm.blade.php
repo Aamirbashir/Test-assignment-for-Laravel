@@ -48,6 +48,15 @@
     <input type="text" v-model="film.ticket_price"  name="token-price" class="form-control" placeholder="Ticket Price">
     <small  class="form-text text-error" style="color: red;"  v-if="errors.ticket_price">@{{errors.ticket_price[0]}}</small>
    </div>
+    <div class="form-group">
+    <label >Genre</label>
+    <select class="form-control" v-model="film.genre" multiple="multiple">
+         <option value="Action">Action</option>
+    <option value="Advanture">Advanture</option>
+    <option value="Drama">Drama</option>
+    <option value="Romantic">Romantic</option>
+</select>
+</div>
    <div class="form-group">
     <label >Coutry</label>
     <select class="form-control" v-model="film.country">
@@ -312,6 +321,7 @@
         rating:1,
         genre:'',
         photo:'',
+        genre:''
 
     },
    
